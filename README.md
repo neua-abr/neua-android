@@ -10,12 +10,16 @@ Android demo implementation using [androidx.media3](https://github.com/androidx/
 This repository provides a reference Android implementation of the **NeUA** ABR algorithm described in:
 
 > Y.-m. Kang et al., "Uncertainty-Aware Neural Network based Adaptive Bitrate
-> Streaming over LTE and 5G NR," *MDPI Electronics*, 2025.
+> Streaming over LTE and 5G NR," *JNL*, 2026.
 
 NeUA integrates a BiLSTM throughput predictor with Monte Carlo Dropout-based
 uncertainty estimation into a dynamic safety factor, enabling more conservative
 bitrate selection during high-uncertainty periods such as LTE handovers and 5G
 beam-blockage events.
+
+This repository is made available as a companion implementation to the above
+paper. A full validation with live network MOS evaluation is planned as future
+work.
 
 ---
 
@@ -88,7 +92,7 @@ proxy for MC Dropout uncertainty. To enable full BiLSTM inference:
    ```
    implementation 'org.tensorflow:tensorflow-lite:2.14.0'
    ```
-3. Replace the `estimateThroughput()` method in `NeUATrackSelection.java`
+3. Replace the statistical proxy in `NeUATrackSelection.java`
    with a TFLite interpreter call.
 
 The INT8-quantized BiLSTM model (156 KB) achieves 0.8 ms inference latency
